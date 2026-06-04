@@ -18,6 +18,10 @@ Machine Learning project to predict appliance energy consumption using environme
 1. Open Jupyter Notebook
 2. Run all cells
 
+## 🖥️ Frontend Options
+- Streamlit UI: `streamlit run app.py`
+- Flask web UI: `python app_flask.py`
+
 ## 🎯 Goal
 Predict energy usage of household appliances based on conditions.
 

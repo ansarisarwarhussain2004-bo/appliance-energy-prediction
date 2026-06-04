@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Appliance Energy Prediction</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="card">
+        <header class="card-header">
+          <h1>⚡ Appliance Energy Prediction</h1>
+          <p class="subtitle">Enter sensor values and see the predicted appliance energy consumption.</p>
+          <p class="model-score">Model R² score: <strong>{{ '%.2f' | format(r2_score) }}</strong></p>
+        </header>
+
+        <form method="post" class="input-form">
+          <div class="grid">
+            {% for feature in input_features %}
+            <label>
+              <span>{{ feature.replace('_', ' ') }}</span>
+              <input
+                type="number"
+                name="{{ feature }}"
+                step="0.1"
+                value="{{ values[feature] }}"
+                required
+              />
+            </label>
+            {% endfor %}
+          </div>
+
+          <button type="submit">Predict Energy</button>
+        </form>
+
+        {% if prediction is not none %}
+        <section class="result-panel">
+          <h2>Predicted Energy Consumption</h2>
+          <p class="result-value">{{ '%.1f' | format(prediction) }} Wh</p>
+        </section>
+        {% endif %}
+
+        <footer class="footer-note">
+          <p>Data source: energydata_complete.xlsx</p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
